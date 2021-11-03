@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+    <title>Document</title>
+  </head>
+
+  <body onload="resetInputFields(), loadCurrentExchangeRate()">
+    <div class="loading-anim-bg flex-center w-100 d-none" id="loading-anim-bg"><div class="loading-anim"></div></div>
+    <header class="flex-center col w-100">
+      <div class="header-headings flex-center col w-100">
+        <h1>Bitcoin exchange rate</h1>
+        <h2 id="subheading">Currency Converter, Current and Historic Exchange Rates</h2>
+      </div>
+      <div class="header-links w-100">
+        <a href="#link-calculator" class="header-link button flex-center col transition"
+          ><span>Currency Converter</span>
+          <img src="./img/down_white.png" class="down-img" />
+        </a>
+        <a href="#link-historic-rates" class="header-link button flex-center col transition"
+          >Historic exchange rates
+          <img src="./img/down_white.png" class="down-img" />
+        </a>
+      </div>
+      <div class="bg-img header-bg-img w-100"></div>
+    </header>
+
+    <!-- --------------  EXCHANGE RATE - CALCULATOR  --------------- -->
+
+    <section class="section1 flex-center col">
+      <div class="section-container flex-center col w-100">
+        <h3 id="link-calculator" class="flex-center transition">Currency Converter: <span class="nobreak">BTC / USD</span></h3>
+        <!-- INPUT -->
+        <div class="section-content section1-content bg-content transition">
+          <div class="calculator flex-center">
+            <div class="calculator-input-container flex-center w-100">
+              <div class="have-want-container">
+                <label for="input-left" class="calc-input-label w-100"
+                  >Currency I have: &nbsp; <b id="have-currency">BTC</b></label
+                >
+                <input
+                  type="text"
+                  id="input-left"
+                  name="input-left flex-center"
+                  class="calculator-input bg-grey w-100"
+                  oninput="convertCurrency(id)"
+                />
+                <div id="placeholder-left" class="placeholder flex-center">BTC</div>
+                <!-- <div id="hint-input-left" class="hint d-none">This is not a valid number</div> -->
+              </div>
+              <img
+                src="./img/exchange.svg"
+                alt="invert currencies"
+                class="invert-currencies"
+                onclick="invertCurrencies()"
+              />
+              <div class="have-want-container">
+                <label for="input-right" class="calc-input-label w-100"
+                  >Currency I want: &nbsp; <b id="want-currency">USD</b></label
+                >
+                <input
+                  type="text"
+                  id="input-right"
+                  name="input-right flex-center"
+                  class="calculator-input bg-grey w-100"
+                  oninput="convertCurrency(id)"
+                />
+                <div id="placeholder-right" class="placeholder flex-center">USD</div>
+                <!-- <div id="hint-input-right" class="hint d-none">This is not a valid number</div> -->
+              </div>
+            </div>
+          </div>
+          <!-- CURRENT EXCHANGE RATE -->
+          <div id="bitcoin-today" class="bitcoin-today">
+            The current exchange rate BTC / USD of the <b id="current-date"></b> is:
+            <div class="current-ex-container flex-center">
+              <div class="current-ex-table-container w-100">
+                <table id="current-ex-table" class="w-100">
+                  <thead>
+                    <tr>
+                      <td></td>
+                      <td>mid</td>
+                      <td>bid</td>
+                      <td>ask</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1 BTC =</td>
+                      <td id="mid"></td>
+                      <td id="bid"></td>
+                      <td id="ask"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div id="refreshed-at-1" class="refreshed-at"></div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-img section-bg-img w-100"></div>
+    </section>
+
+    <!-- --------------  COURSE - OVER PERIOD  ------------------ -->
+
+    <section class="section2 flex-center">
+      <div class="section-container flex-center col w-100">
+        <h3 id="link-historic-rates" class="flex-center transition">Historic exchange rates: <span class="nobreak">BTC / UDS</span></h3>
+        <!-- INPUT -->
+        <div class="section-content section2-content bg-content transition">
+          <div class="section2-head">
+            <div class="chose-dates">Chose your dates:</div>
+            <div class="data-available">First available date: &nbsp; 2014-04-15.</div>
+            <div class="input-dates">
+              <span class="date-span">
+                <label for="start-date">From</label>
+                <input type="date" name="start-date" min="2014-04-15" id="start-date" class="date-input bg-grey"
+              /></span>
+              <span class="date-span">
+                <label for="end-date">to</label>
+                <input type="date" name="end-date" min="2014-04-15" id="end-date" class="date-input bg-grey"
+              /></span>
+              <button class="button section2-button" onclick="loadCourse()">Show exchange rates</button>
+            </div>
+          </div>
+
+          <!-- ---------------  CONTAINER FOR DISPLAYING COURSE  --------------- -->
+
+          <div id="section2-table-chart-container" class="section2-table-chart-container w-100 d-none">
+            <div class="tab-nav flex-center w-100">
+              <div id="tab-shadow-1" class="tab-shadow"></div>
+              <div id="tab-1" class="tab flex-center" tabindex="0" onclick="changeTab('tab-1', 'tab-2'), showChart()">
+                Chart
+              </div>
+              <div id="tab-shadow-2" class="tab-shadow d-none"></div>
+              <div
+                id="tab-2"
+                class="tab flex-center tab-inactive"
+                tabindex="0"
+                onclick="changeTab('tab-2', 'tab-1'), showCourseTable()"
+              >
+                Table
+              </div>
+            </div>
+            <div id="section2-content-container" class="section2-content-container">
+              <!-- --------------  CHART CANVAS  ------------- -->
+
+              <div id="canvas-container" class="canvas-container flex-center">
+                <canvas id="chart-canvas" class="chart-canvas w-100 d-none"></canvas>
+                <img
+                  src="./img/expand.svg"
+                  alt="expand"
+                  id="resize-icon"
+                  class="resize-icon"
+                  onclick="resizeCanvas()"
+                />
+              </div>
+              <div id="chart-hint" class="chart-hint">
+                For some requested rates there is no data available and they have therefore been replaced. <br />See
+                table for more information.
+              </div>
+
+              <!-- -------------  TABLE  -------------- -->
+
+              <table id="course-table" class="w-100">
+                <caption>
+                  Exchange Rates BTC / USD
+                </caption>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Mid</th>
+                    <th>Bid</th>
+                    <th>Ask</th>
+                  </tr>
+                </thead>
+                <tbody id="course-table-content"></tbody>
+              </table>
+
+              <div id="data-info-tooltip" class="data-info-tooltip d-none">
+                <span id="default-rate"></span>. For the initially requested rate there is no data available.
+              </div>
+            </div>
+            <div id="refreshed-at-2" class="refreshed-at"></div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-img header-bg-img w-100"></div>
+    </section>
+    <button id="to-top" class="to-top-btn d-none" onclick="toTop()"><img src="./img/chevron-up.png" class="to-top-img" /></button>
+  </body>
+</html>
