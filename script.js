@@ -12,6 +12,7 @@ let haveCurrency = 'BTC';
 let wantCurrency = 'USD';
 let lastInput;
 let historicalRates = { rates: [], isDefaultRate: [] };
+let canvasFullscreen = false;
 
 /**
  * Resets the input fields for beeing empty on page-loading.
@@ -535,20 +536,27 @@ function setChartLabels() {
  * Resizes the chart-canvas when clicking on the fullscreen / compress-icon.
  */
 function resizeCanvas() {
-  let canvas = document.getElementById('canvas-container');
-  let resizeIcon = document.getElementById('resize-icon');
-
-  if (canvas.classList.contains('canvas-container-fullscreen')) {
-    document.body.style.overflowY = '';
-    canvas.classList.remove('canvas-container-fullscreen');
-    resizeIcon.src = './img/expand.svg';
-    document.getElementById('to-top').classList.remove('d-none');
+  if (canvasFullscreen === false) {
+    openFullscreenChart();
+    canvasFullscreen = true;
   } else {
-    document.body.style.overflowY = 'hidden';
-    canvas.classList.add('canvas-container-fullscreen');
-    resizeIcon.src = './img/compress.svg';
-    document.getElementById('to-top').classList.add('d-none');
+    closeFullscreenChart();
+    canvasFullscreen = false;
   }
+}
+
+function openFullscreenChart(){
+  document.getElementById('canvas-container').classList.add('canvas-container-fullscreen');
+  document.body.style.overflowY = 'hidden';
+  document.getElementById('resize-icon').src = './img/compress.svg';
+  document.getElementById('to-top').classList.add('d-none');
+}
+
+function closeFullscreenChart(){
+  document.getElementById('canvas-container').classList.remove('canvas-container-fullscreen');
+  document.body.style.overflowY = '';
+  document.getElementById('resize-icon').src = './img/expand.svg';
+  document.getElementById('to-top').classList.remove('d-none');
 }
 
 /**
