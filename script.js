@@ -539,12 +539,12 @@ function resizeCanvas() {
   let resizeIcon = document.getElementById('resize-icon');
 
   if (canvas.classList.contains('canvas-container-fullscreen')) {
-    /* document.body.style.overflowY = ''; */
+    document.body.style.overflowY = '';
     canvas.classList.remove('canvas-container-fullscreen');
     resizeIcon.src = './img/expand.svg';
     document.getElementById('to-top').classList.remove('d-none');
   } else {
-    /* document.body.style.overflowY = 'hidden'; */
+    document.body.style.overflowY = 'hidden';
     canvas.classList.add('canvas-container-fullscreen');
     resizeIcon.src = './img/compress.svg';
     document.getElementById('to-top').classList.add('d-none');
