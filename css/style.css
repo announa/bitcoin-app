@@ -169,7 +169,7 @@ section {
 
 .bg-img {
   aspect-ratio: 3/2;
-  background-image: url('./img/layered-peaks-1.svg');
+  background-image: url('../img/layered-peaks-1.svg');
   background-position: center;
   background-size: cover;
   position: absolute;
@@ -178,7 +178,7 @@ section {
 }
 
 .header-bg-img {
-  background-image: url('./img/layered-peaks-2.svg');
+  background-image: url('../img/layered-peaks-2.svg');
   height: 100vh;
   background-position: bottom;
   opacity: 0.2;
