@@ -1,0 +1,103 @@
+/* ---------------  CALCULATOR  --------------- */
+
+.section1-content {
+ padding: 50px;
+}
+
+.calculator {
+ padding-top: 5rem;
+ margin-bottom: 100px;
+}
+
+.calculator-input-container {
+ max-width: 800px;
+ justify-content: space-between;
+}
+
+.have-want-container {
+ height: 4.5rem;
+ width: 44%;
+ text-align: center;
+ position: relative;
+}
+
+.calculator-input {
+ height: 100%;
+ padding-left: 1.3rem;
+ padding-right: 4.5rem;
+ font-size: 1.3rem;
+ letter-spacing: 0.2px;
+}
+
+.calc-input-label {
+ position: absolute;
+ top: -2.5rem;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ font-size: 1.5rem;
+ font-weight: 500;
+}
+
+.placeholder {
+ margin: 0 1rem;
+ font-size: 1.3rem;
+ letter-spacing: 0.2px;
+ position: absolute;
+ top: 0;
+ right: 0;
+ height: inherit;
+ text-align: right;
+ color: #777;
+}
+
+.hint {
+ padding: 3px 10px;
+ font-size: 0.8rem;
+ border: 1px solid white;
+ background: rgba(0, 0, 0, 0.2);
+ position: absolute;
+ top: 0;
+ left: 10%;
+ border-radius: 10px;
+}
+
+.invert-currencies {
+ width: 40px;
+ cursor: pointer;
+ filter: invert(87%);
+}
+
+.invert-currencies:hover {
+ filter: invert(30%) sepia(100%) saturate(1500%) hue-rotate(150deg) brightness(110%);
+}
+
+/* ---------------  CURRENT EXCHANGE RATE  --------------- */
+
+#current-date {
+ margin: 0 5px;
+}
+
+.current-ex-table-container {
+ max-width: 600px;
+ margin-top: 20px;
+ padding: 0.5rem 1rem;
+ border-radius: 2px;
+}
+
+#current-ex-table td {
+ padding: 7px;
+}
+
+#current-ex-table td:first-child {
+ white-space: nowrap;
+}
+
+#current-ex-table td:last-child {
+ border-right: none;
+}
+
+.refreshed-at {
+ margin-top: 30px;
+ font-size: 0.8rem;
+}
+

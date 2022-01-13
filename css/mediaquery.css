@@ -1,0 +1,274 @@
+/* ---------------  MEDIA QUERY  ------------------ */
+
+@media (max-width: 1000px) {
+ h1 {
+   font-size: 2.2rem;
+ }
+ h2 {
+   font-size: 1.5rem;
+ }
+
+ .section-content {
+   width: 90%;
+ }
+
+ .header-links {
+   min-width: 600px;
+ }
+ .header-link {
+   width: 17rem;
+   padding: 1rem;
+   font-size: 1.2rem;
+ }
+ .down-img {
+   width: 2rem;
+ }
+
+ .calc-input-label {
+   font-size: 1.2rem;
+ }
+ .canvas-container-fullscreen {
+   padding: 20px;
+ }
+}
+
+@media (max-width: 800px) {
+ .calculator-input-container {
+   flex-direction: column;
+   height: 300px;
+   width: 300px;
+ }
+
+ .invert-currencies {
+   position: relative;
+   top: -0.9rem;
+   transform: rotate(90deg);
+ }
+
+ .have-want-container {
+   width: 100%;
+ }
+
+ .calc-input-label {
+   top: -2rem;
+ }
+
+ .section2-content-container {
+   padding-left: 0;
+   padding-right: 0;
+ }
+
+ .section2-table-chart-container {
+   padding-left: 0;
+   padding-right: 0;
+ }
+
+ .resize-icon {
+   right: 30px;
+ }
+
+ #course-table {
+   font-size: 0.9rem;
+ }
+
+ #refreshed-at-2 {
+   padding: 0 50px;
+ }
+
+ .to-top-btn {
+   width: 40px;
+   height: 40px;
+   bottom: 40px;
+   right: 30px;
+ }
+}
+
+@media (max-width: 750px) {
+
+ h3 {
+   font-size: 1.4rem;
+ }
+}
+@media (max-width: 650px) {
+ h1 {
+   font-size: 2rem;
+ }
+
+ h2 {
+   font-size: 1.2rem;
+   padding-left: 1rem;
+   padding-right: 1rem;
+ }
+
+
+ .header-links {
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+   min-width: unset;
+ }
+
+ .header-link:first-of-type {
+   margin-bottom: 10%;
+ }
+ .section-content {
+   width: 100%;
+   background: var(--theme-color-bg-1);
+   box-shadow: none;
+   margin-top: 0;
+   padding-bottom: 0;
+ }
+
+ .section1 {
+   padding-bottom: 70px;
+ }
+
+ .calculator {
+   padding-top: 3rem;
+   margin-bottom: 60px;
+ }
+
+ .calculator-input-container {
+   height: 260px;
+ }
+
+ .placeholder {
+   font-size: 1.1rem;
+ }
+
+ .invert-currencies {
+   width: 30px;
+ }
+
+ .section2-content {
+   padding: 0 !important;
+ }
+
+ .section2-head {
+   padding: 50px 50px 20px;
+ }
+
+ .input-dates span:first-child {
+   margin-bottom: 10px;
+ }
+
+ .resize-icon {
+   right: 30px;
+ }
+
+ #refreshed-at-2 {
+   padding-left: 50px;
+ }
+
+ .rate-td {
+   display: flex;
+ }
+
+ .rate-span {
+   padding-right: 10px;
+ }
+ .increase-info-span {
+   padding-left: 10px;
+ }
+
+ #course-table thead {
+   display: none;
+ }
+
+ #course-table tr{
+   border-bottom: 1px solid var(--darker-grey);
+   
+ }
+
+ #course-table tr:first-child {
+   border-top: 1px solid var(--darker-grey);
+ }
+ #course-table td:nth-child(3) {
+   border-top: 1px solid var(--darker-grey);
+   border-bottom: 1px solid var(--darker-grey);
+ }
+
+ #course-table td {
+   font-weight: 600;
+   border-bottom: none;
+ }
+
+ #course-table span {
+   font-weight: 400;
+ }
+
+ .rate-span {
+   width: 60% !important;
+   max-width: 150px;
+ }
+ .increase-info-span {
+   width: 40% !important;
+ }
+ #course-table td:not(:nth-child(1))::before {
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+ }
+ #course-table td:nth-child(2)::before {
+   content: 'mid';
+ }
+ #course-table td:nth-child(3)::before {
+   content: 'bid';
+ }
+ #course-table td:nth-child(4)::before {
+   content: 'ask';
+ }
+
+}
+
+@media (max-width: 600px) {
+ 
+ h3 {
+   display: block !important;
+   position: unset;
+   width: 100%;
+   border-radius: 0;
+ }
+ .nobreak{
+ padding-left: 0;
+ }
+}
+@media (max-width: 500px) {
+ table {
+   font-size: 0.9rem;
+ }
+
+ .current-ex-container {
+   margin-left: -50px;
+   margin-right: -50px;
+ }
+
+ .calculator-input {
+   font-size: 1.1rem;
+   padding-left: 0.8rem;
+   padding-right: 4rem;
+ }
+
+ .section2-head {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
+
+ .date-span {
+   display: flex;
+   align-items: center;
+   position: relative;
+   height: 50px;
+ }
+
+ .date-input {
+   position: absolute;
+   left: 50px;
+   width: 8rem;
+ }
+
+ .resize-icon {
+   top: 15px;
+ }
+}
