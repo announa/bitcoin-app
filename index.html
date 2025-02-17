@@ -48,18 +48,18 @@
           <div class="calculator flex-center">
             <div class="calculator-input-container flex-center w-100">
               <div class="have-want-container">
-                <label for="input-left" class="calc-input-label w-100"
+                <label for="input-bid" class="calc-input-label w-100"
                   >Currency I have: &nbsp; <b id="have-currency">BTC</b></label
                 >
                 <input
                   type="text"
-                  id="input-left"
-                  name="input-left flex-center"
+                  id="input-bid"
+                  name="input-bid flex-center"
                   class="calculator-input bg-grey w-100"
                   oninput="convertCurrency(id)"
                 />
                 <div id="placeholder-left" class="placeholder flex-center">BTC</div>
-                <!-- <div id="hint-input-left" class="hint d-none">This is not a valid number</div> -->
+                <!-- <div id="hint-input-bid" class="hint d-none">This is not a valid number</div> -->
               </div>
               <img
                 src="./img/exchange.svg"
@@ -68,18 +68,18 @@
                 onclick="invertCurrencies()"
               />
               <div class="have-want-container">
-                <label for="input-right" class="calc-input-label w-100"
+                <label for="input-ask" class="calc-input-label w-100"
                   >Currency I want: &nbsp; <b id="want-currency">USD</b></label
                 >
                 <input
                   type="text"
-                  id="input-right"
-                  name="input-right flex-center"
+                  id="input-ask"
+                  name="input-ask flex-center"
                   class="calculator-input bg-grey w-100"
                   oninput="convertCurrency(id)"
                 />
                 <div id="placeholder-right" class="placeholder flex-center">USD</div>
-                <!-- <div id="hint-input-right" class="hint d-none">This is not a valid number</div> -->
+                <!-- <div id="hint-input-ask" class="hint d-none">This is not a valid number</div> -->
               </div>
             </div>
           </div>

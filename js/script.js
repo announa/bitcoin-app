@@ -1,4 +1,9 @@
-let API_KEY = 'zbXxFvqbtzpFrTdQPBAb';
+// const BASE_URL = 'http://localhost:3000';
+const API_KEY = 'bpifyc9u7n2Rs8SxJvSp';
+const BASE_URL = 'https://data.nasdaq.com/api/v3/datatables/QDL/BITFINEX';
+
+let inputBid
+let inputAsk
 let today = new Date();
 today.setDate(new Date().getDate() - 1);
 let currentDate = today.toISOString().split('T')[0];
@@ -7,28 +12,27 @@ let missingData = false;
 let bitcoinChart;
 let tabs = { active: 'tab-1', inactive: 'tab-2' };
 let currentBitcoin;
-let exRate = { name: 'bid', rate: 0 };
+let exRate = { mid: 0, bid: 0, ask: 0 };
 let haveCurrency = 'BTC';
 let wantCurrency = 'USD';
-let lastInput;
 let historicalRates = { rates: [], isDefaultRate: [] };
 let canvasFullscreen = false;
 
 /**
- * Resets the input fields for beeing empty on page-loading.
+ * Resets the input fields for being empty on page-loading.
  */
 function resetInputFields() {
   document.getElementById('to-top').classList.add('d-none');
-  setCalculatorFields();
+  setCalculatorFields('input-bid', '1');
   setDatePicker();
 }
 
 /**
  * Resets the calculator input fields in section one.
  */
-function setCalculatorFields() {
-  document.getElementById('input-left').value = '';
-  document.getElementById('input-right').value = '';
+function setCalculatorFields(field, value) {
+  document.getElementById(field).value = value;
+  convertCurrency(field)
 }
 
 /** Resets the date-picker in section two. */
@@ -46,6 +50,7 @@ async function loadCurrentExchangeRate() {
   await getBitcoinData(currentDate, currentDate);
   setCurrentBitcoin();
   renderExchangeRate();
+  setCalculatorFields('input-bid', '1')
   renderRefreshedAt();
 }
 
@@ -56,10 +61,12 @@ async function loadCurrentExchangeRate() {
  */
 async function getBitcoinData(startdate, enddate) {
   showLoadingAnimation();
-  let url = `https://data.nasdaq.com/api/v3/datasets/BITFINEX/BTCUSD?start_date=${startdate}&end_date=${enddate}&api_key=${API_KEY}`;
+  const dateFilter = startdate === enddate ? `date=${startdate}` : `date.gt=${startdate}&date.lt=${enddate}`;
+  const columnFilter = 'qopts.columns=code,date,mid,bid,ask';
+  let url = `${BASE_URL}?code=BTCUSD&${dateFilter}&${columnFilter}&api_key=${API_KEY}`;
   let response = await fetch(url);
   let responseJSON = await response.json();
-  bitcoinData = responseJSON['dataset'];
+  bitcoinData = responseJSON['data'];
   hideLoadingAnimation();
 }
 
@@ -67,8 +74,10 @@ async function getBitcoinData(startdate, enddate) {
  * Sets the current bitcoin exchange rate
  */
 function setCurrentBitcoin() {
-  currentBitcoin = bitcoinData['data'];
-  exRate['rate'] = currentBitcoin[0][5];
+  currentBitcoin = bitcoinData;
+  exRate['mid'] = currentBitcoin[0][2];
+  exRate['bid'] = currentBitcoin[0][3];
+  exRate['ask'] = currentBitcoin[0][4];
 }
 
 /**
@@ -76,9 +85,9 @@ function setCurrentBitcoin() {
  */
 function renderExchangeRate() {
   document.getElementById('current-date').innerHTML = currentDate;
-  document.getElementById('mid').innerHTML = currentBitcoin[0][3].toFixed(2) + ' USD';
-  document.getElementById('bid').innerHTML = currentBitcoin[0][5].toFixed(2) + ' USD';
-  document.getElementById('ask').innerHTML = currentBitcoin[0][6].toFixed(2) + ' USD';
+  document.getElementById('mid').innerHTML = exRate['mid'].toFixed(2) + ' USD';
+  document.getElementById('bid').innerHTML = exRate['bid'].toFixed(2) + ' USD';
+  document.getElementById('ask').innerHTML = exRate['ask'].toFixed(2) + ' USD';
 }
 
 /**
