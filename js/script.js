@@ -1,6 +1,4 @@
-// const BASE_URL = 'http://localhost:3000';
-const API_KEY = 'bpifyc9u7n2Rs8SxJvSp';
-const BASE_URL = 'https://data.nasdaq.com/api/v3/datatables/QDL/BITFINEX';
+const BASE_URL = 'http://localhost:3000';
 
 let inputBid
 let inputAsk
@@ -63,7 +61,7 @@ async function getBitcoinData(startdate, enddate) {
   showLoadingAnimation();
   const dateFilter = startdate === enddate ? `date=${startdate}` : `date.gt=${startdate}&date.lt=${enddate}`;
   const columnFilter = 'qopts.columns=code,date,mid,bid,ask';
-  let url = `${BASE_URL}?code=BTCUSD&${dateFilter}&${columnFilter}&api_key=${API_KEY}`;
+  let url = `${BASE_URL}?code=BTCUSD&${dateFilter}&${columnFilter}`;
   let response = await fetch(url);
   let responseJSON = await response.json();
   bitcoinData = responseJSON['data'];
