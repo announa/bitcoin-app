@@ -19,7 +19,9 @@
   </head>
 
   <body onload="resetInputFields(), loadCurrentExchangeRate()">
-    <div class="loading-anim-bg flex-center w-100 d-none" id="loading-anim-bg"><div class="loading-anim"></div></div>
+    <div class="loading-anim-bg flex-center w-100 d-none" id="loading-anim-bg">
+      <div class="loading-anim"></div>
+    </div>
     <header class="flex-center col w-100">
       <div class="header-headings flex-center col w-100">
         <h1>Bitcoin exchange rate</h1>
@@ -42,7 +44,9 @@
 
     <section class="section1 flex-center col">
       <div class="section-container flex-center col w-100">
-        <h3 id="link-calculator" class="flex-center transition">Currency Converter: <span class="nobreak">BTC / USD</span></h3>
+        <h3 id="link-calculator" class="flex-center transition">
+          Currency Converter: <span class="nobreak">BTC / USD</span>
+        </h3>
         <!-- INPUT -->
         <div class="section-content section1-content bg-content transition">
           <div class="calculator flex-center">
@@ -119,7 +123,9 @@
 
     <section class="section2 flex-center">
       <div class="section-container flex-center col w-100">
-        <h3 id="link-historic-rates" class="flex-center transition">Historic exchange rates: <span class="nobreak">BTC / UDS</span></h3>
+        <h3 id="link-historic-rates" class="flex-center transition">
+          Historic exchange rates: <span class="nobreak">BTC / UDS</span>
+        </h3>
         <!-- INPUT -->
         <div class="section-content section2-content bg-content transition">
           <div class="section2-head">
@@ -128,7 +134,12 @@
             <div class="input-dates">
               <span class="date-span">
                 <label for="start-date">From</label>
-                <input type="date" name="start-date" min="2014-04-15" id="start-date" class="date-input bg-grey"
+                <input
+                  type="date"
+                  name="start-date"
+                  min="2014-04-15"
+                  id="start-date"
+                  class="date-input bg-grey"
               /></span>
               <span class="date-span">
                 <label for="end-date">to</label>
@@ -143,7 +154,12 @@
           <div id="section2-table-chart-container" class="section2-table-chart-container w-100 d-none">
             <div class="tab-nav flex-center w-100">
               <div id="tab-shadow-1" class="tab-shadow"></div>
-              <div id="tab-1" class="tab flex-center" tabindex="0" onclick="changeTab('tab-1', 'tab-2'), showChart()">
+              <div
+                id="tab-1"
+                class="tab flex-center"
+                tabindex="0"
+                onclick="changeTab('tab-1', 'tab-2'), showChart()"
+              >
                 Chart
               </div>
               <div id="tab-shadow-2" class="tab-shadow d-none"></div>
@@ -160,7 +176,7 @@
               <!-- --------------  CHART CANVAS  ------------- -->
 
               <div id="canvas-container" class="canvas-container flex-center">
-                <canvas id="chart-canvas" class="chart-canvas w-100 d-none" style="max-height: 80vh;"></canvas>
+                <canvas id="chart-canvas" class="chart-canvas w-100 d-none" style="max-height: 80vh"></canvas>
                 <img
                   src="./img/expand.svg"
                   alt="expand"
@@ -170,8 +186,8 @@
                 />
               </div>
               <div id="chart-hint" class="chart-hint">
-                For some requested rates there is no data available and they have therefore been replaced. <br />See
-                table for more information.
+                For some requested rates there is no data available and they have therefore been replaced.
+                <br />See table for more information.
               </div>
 
               <!-- -------------  TABLE  -------------- -->
@@ -201,6 +217,8 @@
       </div>
       <div class="bg-img header-bg-img w-100"></div>
     </section>
-    <button id="to-top" class="to-top-btn d-none" onclick="toTop()"><img src="./img/chevron-up.png" class="to-top-img" /></button>
+    <button id="to-top" class="to-top-btn d-none bg-content" onclick="toTop()">
+      <img src="./img/chevron-up.png" class="to-top-img" />
+    </button>
   </body>
 </html>
