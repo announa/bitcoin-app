@@ -13,7 +13,7 @@ ALLOWED_ORIGIN = os.getenv('ALLOWED_ORIGIN')
 
 app = Flask(__name__)
 
-CORS(app, resources={r"/*": {"origins": ALLOWED_ORIGIN}})
+CORS(app, supports_credentials=True, origins=[ALLOWED_ORIGIN])
 
 class RequestException(Exception):
 

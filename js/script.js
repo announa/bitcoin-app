@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'bitcoin-app-sigma.vercel.app';
 
 let inputBid
 let inputAsk

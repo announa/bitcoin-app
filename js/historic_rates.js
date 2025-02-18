@@ -48,8 +48,8 @@ function getSelectedDates() {
 function getHistoricalRates() {
   historicalRates = { rates: [], isDefaultRate: [] };
 
-  bitcoinData['data'].forEach((btcDataSet, dataSetIndex) => {
-    historicalRates['rates'].push([btcDataSet[0], btcDataSet[3], btcDataSet[5], btcDataSet[6]]); // values = date, mid, bid, aks
+  bitcoinData.forEach((btcDataSet, dataSetIndex) => {
+    historicalRates['rates'].push([btcDataSet[1], btcDataSet[2], btcDataSet[3], btcDataSet[4]]); // values = date, mid, bid, aks
     historicalRates['isDefaultRate'].push([btcDataSet[0], false, false, false]); // false = default-value, might be changed in replaceMissingData().
     replaceMissingData(btcDataSet, dataSetIndex);
   });
