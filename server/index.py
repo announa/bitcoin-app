@@ -24,21 +24,24 @@ class RequestException(Exception):
 @app.route("/", methods=["GET"])
 
 def fetch_data():
-        request_params = request.query_string
-        print(request_params)
-        if not request_params:
-             raise RequestException("Missing request parameters", 400)
-        
-        decoded_params = request.query_string.decode("utf-8")
-        params = f"{decoded_params}&api_key={API_KEY}"
-        url = f"{BASE_URL}?{params}"
+        url_params = request.query_string
+        print("Query parameters:", url_params or "no parameters")
+        request_params= ""
+
+        if url_params:
+            decoded_params = url_params.decode("utf-8")
+            request_params = f"{decoded_params}&api_key={API_KEY}"
+        else:
+            request_params = f"api_key={API_KEY}"
+            
+        url = f"{BASE_URL}?{request_params}"
 
         try:
             response = requests.get(url)
             status = response.status_code
             data = response.json()
 
-            print("Data: ", data)
+            print("Data: ", str(data)[:500] + "...")
 
             if "quandl_error" in data:
                 message = data["quandl_error"]["message"]
