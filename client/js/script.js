@@ -1,7 +1,8 @@
 const BASE_URL = 'bitcoin-app-sigma.vercel.app';
 
-let inputBid
-let inputAsk
+let inputBid;
+let inputAsk;
+let lastInput;
 let today = new Date();
 today.setDate(new Date().getDate() - 1);
 let currentDate = today.toISOString().split('T')[0];
@@ -30,7 +31,7 @@ function resetInputFields() {
  */
 function setCalculatorFields(field, value) {
   document.getElementById(field).value = value;
-  convertCurrency(field)
+  convertCurrency(field);
 }
 
 /** Resets the date-picker in section two. */
@@ -48,7 +49,8 @@ async function loadCurrentExchangeRate() {
   await getBitcoinData(currentDate, currentDate);
   setCurrentBitcoin();
   renderExchangeRate();
-  setCalculatorFields('input-bid', '1')
+  setCalculatorFields('input-bid', '1');
+  await getRefreshedAt();
   renderRefreshedAt();
 }
 
@@ -61,11 +63,18 @@ async function getBitcoinData(startdate, enddate) {
   showLoadingAnimation();
   const dateFilter = startdate === enddate ? `date=${startdate}` : `date.gt=${startdate}&date.lt=${enddate}`;
   const columnFilter = 'qopts.columns=code,date,mid,bid,ask';
-  let url = `${BASE_URL}?code=BTCUSD&${dateFilter}&${columnFilter}`;
-  let response = await fetch(url);
-  let responseJSON = await response.json();
+  const url = `${BASE_URL}?code=BTCUSD&${dateFilter}&${columnFilter}`;
+  const response = await fetch(url);
+  const responseJSON = await response.json();
   bitcoinData = responseJSON['data'];
   hideLoadingAnimation();
+}
+
+async function getRefreshedAt() {
+  const url = `${BASE_URL}/metadata`;
+  const response = await fetch(url);
+  const responseJSON = await response.json();
+  bitcoinData['refreshed_at'] = responseJSON['status']['refreshed_at'];
 }
 
 /**
@@ -92,7 +101,9 @@ function renderExchangeRate() {
  * Renders the refreshed-at fields at the end of both sections
  */
 function renderRefreshedAt() {
-  let refreshedAt = bitcoinData['refreshed_at'].replace('T', ', ');
+  const date = new Date(bitcoinData['refreshed_at']).toLocaleDateString('en-GB');
+  const time = new Date(bitcoinData['refreshed_at']).toTimeString().split(' ')[0];
+  let refreshedAt = date + ' ' + time;
   [...document.getElementsByClassName('refreshed-at')].forEach(
     (container) => (container.innerHTML = `Data refreshed at <b>${refreshedAt}</b>`)
   );

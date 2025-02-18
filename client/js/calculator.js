@@ -1,11 +1,17 @@
 /* -----------  CALCULATOR  ------------- */
 
+function formatValue(value){
+  return Number(value).toLocaleString("en", { maximumFractionDigits: 7 });
+}
 /**
  * Converts the calculator-input to the target-currency depending on the current rate (bid or ask) and the input field (have = left or want = rigth).
  * @param {string} inputField - The ID of the input field
  */
 function convertCurrency(inputField) {
-  const input = replaceComma(inputField);
+  lastInput = inputField
+  const inputElement = document.getElementById(inputField)
+  const input = inputElement.value.replace(/\D/g, '');
+  inputElement.value = formatValue(input)
 
   if (inputField === 'input-bid' && haveCurrency === 'BTC') {
     getCalcOutput(input, 'bid', 'multiply');
@@ -32,23 +38,10 @@ function getCalcOutput(input, action, operation) {
 
   if (!isNaN(input)) {
     const result = operation === 'multiply' ? input * exRate[action] : input / exRate[action];
-    output.style.fontSize = '';
-    output.value = result.toLocaleString(undefined, { maximumFractionDigits: 7 });
+    output.value = formatValue(result)
   } else {
-    output.style.fontSize = '.9rem';
-    output.value = 'This is not a valid number';
+    output.value = 'Not a valid number';
   }
-}
-
-/**
- * Replaces possible comma with dot. For local comma as decimal separator.
- * @param {string} inputfield - The field in which the user types the amount he wants to convert
- * @returns {string} - The number with comma replaced with dot
- */
-function replaceComma(inputfield) {
-  let input = document.getElementById(inputfield);
-  input.value = input.value.replace(',', '.');
-  return input.value.replace(',', '.');
 }
 
 /**
@@ -57,7 +50,7 @@ function replaceComma(inputfield) {
 function invertCurrencies() {
   invertExchangeRates();
   changeLabels();
-  convertCurrency('input-bid');
+  convertCurrency(lastInput);
 }
 
 function invertExchangeRates() {
