@@ -1,4 +1,4 @@
-const BASE_URL = 'bitcoin-app-sigma.vercel.app';
+const BASE_URL = 'https://bitcoin-app-sigma.vercel.app';
 
 let inputBid;
 let inputAsk;
