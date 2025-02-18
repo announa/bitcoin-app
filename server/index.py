@@ -9,10 +9,11 @@ load_dotenv()
 
 API_KEY = os.getenv('API_KEY')
 BASE_URL = os.getenv('BASE_URL')
+ALLOWED_ORIGIN = os.getenv('ALLOWED_ORIGIN')
 
 app = Flask(__name__)
-CORS(app)
 
+CORS(app, resources={r"/*": {"origins": ALLOWED_ORIGIN}})
 
 class RequestException(Exception):
 
